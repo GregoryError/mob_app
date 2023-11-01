@@ -19,4 +19,5 @@
     <string name="bad_400">Отсутствуют данные!</string>
     <string name="hi_str">Здравствуйте,</string>
     <string name="discount_text">Ваша персональная скидка:</string>
+    <string name="permission_label">Доступ к местоположению поможет нам найти салоны по близости.</string>
 </resources>

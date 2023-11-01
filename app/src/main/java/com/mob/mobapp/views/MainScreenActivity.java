@@ -3,10 +3,12 @@ package com.mob.mobapp.views;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -27,6 +29,13 @@ public class MainScreenActivity extends AppCompatActivity implements ScreenView 
     private TextView textViewPromoDesc;
     private TextView textViewHelloUser;
     private TextView textViewDiscount;
+
+    private Button button_0;
+    private Button button_1;
+    private Button button_2;
+    private Button button_3;
+    private Button button_4;
+    private Button button_5;
 
     private String uName;
     private String uPhone;
@@ -49,6 +58,23 @@ public class MainScreenActivity extends AppCompatActivity implements ScreenView 
         textViewHelloUser = findViewById(R.id.textViewHelloUser);
         textViewDiscount = findViewById(R.id.textViewDiscount);
 
+        button_0 = findViewById(R.id.button_0);
+        button_1 = findViewById(R.id.button_1);
+        button_2 = findViewById(R.id.button_2);
+        button_3 = findViewById(R.id.button_3);
+        button_4 = findViewById(R.id.button_4);
+        button_5 = findViewById(R.id.button_5);
+
+        button_0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MapViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        // Load main screen data
         mainScreenPresenter = new MainScreenPresenter(this);
 
         Bundle extras = getIntent().getExtras();
@@ -66,7 +92,8 @@ public class MainScreenActivity extends AppCompatActivity implements ScreenView 
     public void showData(Object object) {
         InitData initData = (InitData) object;
         textViewHelloUser.setText(String.format("%s%s", getString(R.string.hi_str), ' ' + uName));
-        textViewCount.setText(String.format("%s%s", String.valueOf(initData.getCount()), getString(R.string.bonuses)));
+        textViewCount.setText(String.format("%s%s", String.valueOf(initData.getCount()),
+                getString(R.string.bonuses)));
         String discountStr = getString(R.string.discount_text) + ' ' +
                 (Integer) initData.getCount() / 100 + "%";
         textViewDiscount.setText(discountStr);

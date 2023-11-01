@@ -1,24 +1,30 @@
 package com.mob.mobapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mob.mobapp.api.ApiFactory;
-import com.mob.mobapp.pojos.InitData;
+import com.mob.mobapp.utils.Permissions;
 import com.mob.mobapp.utils.SystemWorker;
 import com.mob.mobapp.views.MainScreenActivity;
+import com.yandex.mapkit.MapKitFactory;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +32,8 @@ import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String MAP_API_KEY = "829c15f6-14ab-41b7-8b97-7d7dc0e9e64d";
 
     private TextInputEditText editTextName;
     private TextInputEditText editTextPhone;
@@ -36,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Yandex MAP kit
+        MapKitFactory.setApiKey(MAP_API_KEY);
+        MapKitFactory.initialize(this);
+
         setContentView(R.layout.activity_main);
 
 
@@ -123,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
 
     }
 
