@@ -15,6 +15,8 @@
     <string name="mismatch_403">Пользователь найден но имя и телефон не совпадают.</string>
     <string name="welcome_200">С возвращением!</string>
     <string name="welcome_201">Добро пожаловать!</string>
+    <string name="response_403">403: Не верная авторизация.</string>
+    <string name="response_204">204: Нет данных!</string>
     <string name="welcome_206">Уведомления отключены!</string>
     <string name="bad_400">Отсутствуют данные!</string>
     <string name="hi_str">Здравствуйте,</string>

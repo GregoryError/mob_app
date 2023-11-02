@@ -46,6 +46,13 @@ public class MainScreenActivity extends AppCompatActivity implements ScreenView 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            uName = extras.getString("userName");
+            uPhone = extras.getString("userPhone");
+        }
+
+
         setContentView(R.layout.activity_main_screen);
 
         Window window = getWindow();
@@ -69,6 +76,8 @@ public class MainScreenActivity extends AppCompatActivity implements ScreenView 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MapViewActivity.class);
+                intent.putExtra("userName", uName);
+                intent.putExtra("userPhone", uPhone);
                 startActivity(intent);
             }
         });
@@ -76,13 +85,6 @@ public class MainScreenActivity extends AppCompatActivity implements ScreenView 
 
         // Load main screen data
         mainScreenPresenter = new MainScreenPresenter(this);
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            uName = extras.getString("userName");
-            uPhone = extras.getString("userPhone");
-        }
-
         mainScreenPresenter.setUserName(uName);
         mainScreenPresenter.setUserTel(uPhone);
         mainScreenPresenter.loadData();

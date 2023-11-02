@@ -1,27 +1,20 @@
 package com.mob.mobapp;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mob.mobapp.api.ApiFactory;
-import com.mob.mobapp.utils.Permissions;
 import com.mob.mobapp.utils.SystemWorker;
 import com.mob.mobapp.views.MainScreenActivity;
 import com.yandex.mapkit.MapKitFactory;
