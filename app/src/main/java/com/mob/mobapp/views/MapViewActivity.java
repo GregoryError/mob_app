@@ -1,18 +1,15 @@
 package com.mob.mobapp.views;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.PointF;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -21,30 +18,22 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.mob.mobapp.R;
 import com.mob.mobapp.pojos.Center;
-import com.mob.mobapp.presenters.MapViewPresenter;
+import com.mob.mobapp.presenters.CenterViewPresenter;
 import com.mob.mobapp.utils.Permissions;
 import com.mob.mobapp.utils.SystemWorker;
 import com.yandex.mapkit.Animation;
 import com.yandex.mapkit.MapKit;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.Point;
-import com.yandex.mapkit.layers.ObjectEvent;
 import com.yandex.mapkit.map.CameraPosition;
-import com.yandex.mapkit.map.CompositeIcon;
-import com.yandex.mapkit.map.IconStyle;
 import com.yandex.mapkit.map.Map;
 import com.yandex.mapkit.map.MapObject;
 import com.yandex.mapkit.map.MapObjectCollection;
 import com.yandex.mapkit.map.MapObjectTapListener;
-import com.yandex.mapkit.map.MapType;
 import com.yandex.mapkit.map.PlacemarkMapObject;
-import com.yandex.mapkit.map.RotationType;
 import com.yandex.mapkit.mapview.MapView;
 import com.yandex.mapkit.user_location.UserLocationLayer;
-import com.yandex.mapkit.user_location.UserLocationObjectListener;
-import com.yandex.mapkit.user_location.UserLocationView;
 import com.yandex.runtime.image.ImageProvider;
-import com.yandex.runtime.ui_view.ViewProvider;
 
 import java.util.ArrayList;
 
@@ -77,6 +66,11 @@ public class MapViewActivity extends AppCompatActivity implements ScreenView {
         }
 
         setContentView(R.layout.activity_map_view);
+        Window window = getWindow();
+        window.setStatusBarColor(getColor(R.color.white));
+        SystemWorker.getInstance().changeStatusBarContrastStyle(window, false);
+
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         yaMapView = findViewById(R.id.yaMapView);
@@ -162,7 +156,7 @@ public class MapViewActivity extends AppCompatActivity implements ScreenView {
             }
         });
 
-        MapViewPresenter mapViewPresenter = new MapViewPresenter(this);
+        CenterViewPresenter mapViewPresenter = new CenterViewPresenter(this);
         mapViewPresenter.setUserName(uName);
         mapViewPresenter.setUserPhone(uPhone);
 

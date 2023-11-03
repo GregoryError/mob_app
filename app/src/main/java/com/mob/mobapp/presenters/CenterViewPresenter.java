@@ -1,8 +1,5 @@
 package com.mob.mobapp.presenters;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.mob.mobapp.R;
 import com.mob.mobapp.api.ApiFactory;
 import com.mob.mobapp.pojos.Center;
 import com.mob.mobapp.views.Presentable;
@@ -14,7 +11,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MapViewPresenter implements Presentable {
+public class CenterViewPresenter implements Presentable {
     private String userName;
     private String userPhone;
     private ScreenView screenView;
@@ -25,7 +22,6 @@ public class MapViewPresenter implements Presentable {
         ApiFactory.getInstance().getApiService().getCentersUser(userName, userPhone).enqueue(new Callback<ArrayList<Center>>() {
             @Override
             public void onResponse(Call<ArrayList<Center>> call, Response<ArrayList<Center>> response) {
-                System.out.println("CENTER: " + response.code());
                 switch (response.code()) {
                     case 200: {
                         screenView.showData(response.body());
@@ -50,7 +46,7 @@ public class MapViewPresenter implements Presentable {
         });
     }
 
-    public MapViewPresenter(ScreenView screenView) {
+    public CenterViewPresenter(ScreenView screenView) {
         this.screenView = screenView;
     }
 

@@ -1,10 +1,13 @@
 package com.mob.mobapp.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
-import android.content.Context;
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -12,18 +15,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.mob.mobapp.MainActivity;
 import com.mob.mobapp.R;
-import com.mob.mobapp.api.ApiFactory;
 import com.mob.mobapp.pojos.InitData;
 import com.mob.mobapp.presenters.MainScreenPresenter;
+import com.mob.mobapp.utils.Permissions;
 import com.mob.mobapp.utils.SystemWorker;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import org.w3c.dom.ls.LSParser;
 
 public class MainScreenActivity extends AppCompatActivity implements ScreenView {
+
+    private Activity self = this;
     private TextView textViewCount;
     private TextView textViewPromoName;
     private TextView textViewPromoDesc;
@@ -82,6 +84,24 @@ public class MainScreenActivity extends AppCompatActivity implements ScreenView 
             }
         });
 
+        button_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "+78129562358"));// Initiates the Intent
+                startActivity(intent);
+            }
+        });
+
+        button_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CentersActivity.class);
+                intent.putExtra("userName", uName);
+                intent.putExtra("userPhone", uPhone);
+                startActivity(intent);
+            }
+        });
+
 
         // Load main screen data
         mainScreenPresenter = new MainScreenPresenter(this);
@@ -115,5 +135,7 @@ public class MainScreenActivity extends AppCompatActivity implements ScreenView 
     public void showError(String message) {
 
     }
+
+
 
 }

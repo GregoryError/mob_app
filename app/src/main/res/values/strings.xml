@@ -22,4 +22,6 @@
     <string name="hi_str">Здравствуйте,</string>
     <string name="discount_text">Ваша персональная скидка:</string>
     <string name="permission_label">Доступ к местоположению поможет нам найти салоны по близости.</string>
+    <string name="service_centers_txt">Сервисные центры:</string>
+    <string name="make_call_text">Необходимо разрешение для совершения звонков</string>
 </resources>

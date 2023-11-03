@@ -1,11 +1,15 @@
 package com.mob.mobapp.utils;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.View;
 import android.view.Window;
+
 
 public class SystemWorker {
     private static SystemWorker instance;
@@ -30,9 +34,9 @@ public class SystemWorker {
         }
     }
 
-    public static Bitmap drawableToBitmap (Drawable drawable) {
+    public static Bitmap drawableToBitmap(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable)drawable).getBitmap();
+            return ((BitmapDrawable) drawable).getBitmap();
         }
 
         int width = drawable.getIntrinsicWidth();
@@ -47,4 +51,5 @@ public class SystemWorker {
 
         return bitmap;
     }
+
 }

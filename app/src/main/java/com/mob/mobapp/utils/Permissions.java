@@ -17,13 +17,18 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.snackbar.Snackbar;
 import com.mob.mobapp.R;
 
-public class Permissions {
+public class Permissions extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
     public static final int REQUEST_LOCATION = 1;
     public static String[] PERMISSIONS_LOCATION = {
             Manifest.permission.LOCATION_HARDWARE,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION
+    };
+
+    public static final int REQUEST_CALL = 3;
+    public static String[] PERMISSIONS_CALL = {
+            Manifest.permission.CALL_PHONE,
     };
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -76,4 +81,22 @@ public class Permissions {
                     }).show();
         }
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
