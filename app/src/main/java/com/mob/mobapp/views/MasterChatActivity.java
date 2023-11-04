@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageButton;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.mob.mobapp.R;
 import com.mob.mobapp.adapters.CenterAdapter;
 import com.mob.mobapp.pojos.Center;
@@ -18,67 +16,50 @@ import com.mob.mobapp.utils.SystemWorker;
 
 import java.util.ArrayList;
 
-public class CentersActivity extends AppCompatActivity implements ScreenView {
-    private ImageButton imageButtonBack;
-    private RecyclerView recyclerViewCenter;
+public class MasterChatActivity extends AppCompatActivity implements ScreenView{
     private String uName;
     private String uPhone;
-    private CenterAdapter centerAdapter;
+    private RecyclerView recyclerViewCenterChat;
+    private CenterAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             uName = extras.getString("userName");
             uPhone = extras.getString("userPhone");
         }
 
-        setContentView(R.layout.activity_centers);
+        setContentView(R.layout.activity_master_chat);
         Window window = getWindow();
         window.setStatusBarColor(getColor(R.color.white));
         SystemWorker.getInstance().changeStatusBarContrastStyle(window, false);
 
-        imageButtonBack = findViewById(R.id.imageButtonBack);
-        imageButtonBack.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.imageButtonBack).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
-        recyclerViewCenter = findViewById(R.id.recyclerViewCenter);
-
+        recyclerViewCenterChat = findViewById(R.id.recyclerViewCenterChat);
         CenterViewPresenter presenter = new CenterViewPresenter(this);
         presenter.setUserName(uName);
         presenter.setUserPhone(uPhone);
         presenter.loadData();
-
     }
 
     @Override
     public void showData(Object object) {
-        recyclerViewCenter.setLayoutManager(new GridLayoutManager(this, GridLayoutManager.VERTICAL));
-        centerAdapter = new CenterAdapter(this, true);
-        centerAdapter.setuName(uName);
-        centerAdapter.setuPhone(uPhone);
-        recyclerViewCenter.setAdapter(centerAdapter);
-        centerAdapter.setCenterArrayList((ArrayList<Center>) object);
+        adapter = new CenterAdapter(this, false);
+        recyclerViewCenterChat.setLayoutManager(new GridLayoutManager(this, GridLayoutManager.VERTICAL));
+        recyclerViewCenterChat.setAdapter(adapter);
+        adapter.setCenterArrayList((ArrayList<Center>) object);
     }
 
     @Override
     public void showError(String message) {
-        Snackbar.make(findViewById(R.id.constraintCenters), message, Snackbar.LENGTH_LONG).show();
+
     }
 }
-
-
-
-
-
-
-
-
-
-

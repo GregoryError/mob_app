@@ -57,7 +57,7 @@ public class MainScreenPresenter implements Presentable {
 
                     @Override
                     public void onFailure(Call<InitData> call, Throwable t) {
-                        Toast.makeText((AppCompatActivity)screenView, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        screenView.showError(t.getMessage());
                     }
                 });
     }

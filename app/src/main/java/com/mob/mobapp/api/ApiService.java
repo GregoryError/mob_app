@@ -3,6 +3,7 @@ package com.mob.mobapp.api;
 import com.google.gson.JsonObject;
 import com.mob.mobapp.pojos.Center;
 import com.mob.mobapp.pojos.InitData;
+import com.mob.mobapp.pojos.Order;
 
 import java.util.ArrayList;
 
@@ -24,4 +25,8 @@ public interface ApiService {
                                   @Query("token") String token);
     @GET("getCentersUser")
     Call<ArrayList<Center>> getCentersUser(@Query("name") String name, @Query("tel") String tel);
+
+    // getOrdersUser
+    @GET("getOrdersUser")
+    Call<ArrayList<Order>> getOrdersUser(@Query("name") String name, @Query("tel") String tel);
 }

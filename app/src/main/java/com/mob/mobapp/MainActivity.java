@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         window.setStatusBarColor(getColor(R.color.white));
         SystemWorker.getInstance().changeStatusBarContrastStyle(window, false);
 
-        //      sharedPref.edit().remove(getString(R.string.username)).apply();
+        //     sharedPref.edit().remove(getString(R.string.username)).apply();
 
         // check if already authorized
         if (sharedPref.contains(getString(R.string.username))) {

@@ -1,13 +1,14 @@
 package com.mob.mobapp.pojos;
 
 public class Center {
+
+    private Integer cId;
     private Double lon;
     private Double lat;
     private String address;
     private String hours;
     private String description;
     private String img;
-
     public Center() {
     }
 
@@ -66,5 +67,13 @@ public class Center {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public Integer getcId() {
+        return cId;
+    }
+
+    public void setcId(Integer cId) {
+        this.cId = cId;
     }
 }

@@ -26,6 +26,7 @@ import com.yandex.mapkit.MapKit;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.map.CameraPosition;
+import com.yandex.mapkit.map.IconStyle;
 import com.yandex.mapkit.map.Map;
 import com.yandex.mapkit.map.MapObject;
 import com.yandex.mapkit.map.MapObjectCollection;
@@ -49,11 +50,10 @@ public class MapViewActivity extends AppCompatActivity implements ScreenView {
     private UserLocationLayer userLocationLayer;
     private MapObjectCollection pointCollection;
     private Point currentPosition;
-
-
-    // temp test coords:
-    private double test_lat = 60.695260;
-    private double test_lon = 28.772791;
+    private Double placeLon = null;
+    private Double placeLat = null;
+    private String pointDescStr = null;
+    private Integer place_cId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +63,21 @@ public class MapViewActivity extends AppCompatActivity implements ScreenView {
         if (extras != null) {
             uName = extras.getString("userName");
             uPhone = extras.getString("userPhone");
+            if (extras.containsKey("lon") &&
+                    extras.containsKey("lat") &&
+                    extras.containsKey("pointDescription") &&
+                    extras.containsKey("cId")) {
+                placeLon = extras.getDouble("lon");
+                placeLat = extras.getDouble("lat");
+                pointDescStr = extras.getString("pointDescription");
+                place_cId = extras.getInt("cId");
+            }
         }
 
         setContentView(R.layout.activity_map_view);
         Window window = getWindow();
         window.setStatusBarColor(getColor(R.color.white));
         SystemWorker.getInstance().changeStatusBarContrastStyle(window, false);
-
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -99,7 +107,7 @@ public class MapViewActivity extends AppCompatActivity implements ScreenView {
                     // Logic to handle location object
                     currentPosition = new Point(location.getLatitude(), location.getLongitude());
                     CameraPosition cameraPosition = new CameraPosition();
-                    yaMap.move(new CameraPosition(currentPosition, 16.0f, 0.0f, 40.0f),
+                    yaMap.move(new CameraPosition(currentPosition, 15.0f, 0.0f, 40.0f),
                             new Animation(Animation.Type.SMOOTH, 2),
                             null);
 
@@ -108,50 +116,6 @@ public class MapViewActivity extends AppCompatActivity implements ScreenView {
                     userLocationLayer = mapKit.createUserLocationLayer(yaMapView.getMapWindow());
                     userLocationLayer.setVisible(true);
                     userLocationLayer.setHeadingEnabled(true);
-
-//                    userLocationLayer.setObjectListener(new UserLocationObjectListener() {
-//                        @Override
-//                        public void onObjectAdded(@NonNull UserLocationView userLocationView) {
-//                            userLocationLayer.setAnchor(
-//                                    new PointF((float) (yaMapView.getWidth() * 0.5), (float) (yaMapView.getHeight() * 0.5)),
-//                                    new PointF((float) (yaMapView.getWidth() * 0.5), (float) (yaMapView.getHeight() * 0.83)));
-//
-//                            userLocationView.getArrow().setIcon(ImageProvider.fromResource(
-//                                    getApplicationContext(), R.drawable.my_location_24));
-//
-//                            CompositeIcon pinIcon = userLocationView.getPin().useCompositeIcon();
-//
-//                            pinIcon.setIcon(
-//                                    "icon",
-//                                    ImageProvider.fromResource(getApplicationContext(), R.drawable.my_location_24),
-//                                    new IconStyle().setAnchor(new PointF(0f, 0f))
-//                                            .setRotationType(RotationType.ROTATE)
-//                                            .setZIndex(0f)
-//                                            .setScale(1f)
-//                            );
-//
-//                            pinIcon.setIcon(
-//                                    "pin",
-//                                    ImageProvider.fromResource(getApplicationContext(), R.drawable.my_location_24),
-//                                    new IconStyle().setAnchor(new PointF(0.5f, 0.5f))
-//                                            .setRotationType(RotationType.ROTATE)
-//                                            .setZIndex(1f)
-//                                            .setScale(0.5f)
-//                            );
-//
-//                            userLocationView.getAccuracyCircle().setFillColor(Color.BLUE & 0x99ffffff);
-//                        }
-//
-//                        @Override
-//                        public void onObjectRemoved(@NonNull UserLocationView userLocationView) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onObjectUpdated(@NonNull UserLocationView userLocationView, @NonNull ObjectEvent objectEvent) {
-//
-//                        }
-//                    });
                 }
             }
         });
@@ -159,15 +123,17 @@ public class MapViewActivity extends AppCompatActivity implements ScreenView {
         CenterViewPresenter mapViewPresenter = new CenterViewPresenter(this);
         mapViewPresenter.setUserName(uName);
         mapViewPresenter.setUserPhone(uPhone);
-
-        System.out.println("CENTER: " + uName + " " + uPhone);
         mapViewPresenter.loadData();
     }
 
-    private void addPlaceMark(Point point, String description) {
+    private void addPlaceMark(Point point, String description, Boolean accentMark) {
         PlacemarkMapObject placemark = pointCollection.addPlacemark(point);
         placemark.setOpacity(0.7f);
-        placemark.setIcon(ImageProvider.fromBitmap(SystemWorker.drawableToBitmap(getDrawable(R.drawable.placemarkicon))));
+        if (!accentMark) {
+            placemark.setIcon(ImageProvider.fromBitmap(SystemWorker.drawableToBitmap(getDrawable(R.drawable.placemarkicon))));
+        } else {
+            placemark.setIcon(ImageProvider.fromBitmap(SystemWorker.drawableToBitmap(getDrawable(R.drawable.placemark_accent))), new IconStyle().setScale(1.7F));
+        }
         placemark.addTapListener(new MapObjectTapListener() {
             @Override
             public boolean onMapObjectTap(@NonNull MapObject mapObject, @NonNull Point point) {
@@ -183,8 +149,7 @@ public class MapViewActivity extends AppCompatActivity implements ScreenView {
                     }
                 });
                 snackbar.show();
-
-              //  Toast.makeText(MapViewActivity.this, description, Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(MapViewActivity.this, description, Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -207,15 +172,16 @@ public class MapViewActivity extends AppCompatActivity implements ScreenView {
     @Override
     public void showData(Object object) {
         ArrayList<Center> centers = (ArrayList<Center>) object;
-
         pointCollection = yaMap.getMapObjects().addCollection();
 
         for (Center c : centers) {
-            addPlaceMark(new Point(c.getLat(), c.getLon()), c.getAddress() + " " + c.getHours());
+            if (c.getcId() != place_cId)
+                addPlaceMark(new Point(c.getLat(), c.getLon()), c.getAddress() + " " + c.getHours(), false);
         }
 
-//        addPlaceMark(new Point(test_lat, test_lon), "Эгос");
-
+        // add place mark if user go from centers list
+        if (placeLat != null && placeLon != null && pointDescStr != null)
+            addPlaceMark(new Point(placeLat, placeLon), pointDescStr, true);
     }
 
     @Override

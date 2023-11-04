@@ -24,4 +24,10 @@
     <string name="permission_label">Доступ к местоположению поможет нам найти салоны по близости.</string>
     <string name="service_centers_txt">Сервисные центры:</string>
     <string name="make_call_text">Необходимо разрешение для совершения звонков</string>
+    <string name="orders_history_text">История заказов:</string>
+    <string name="back_text">вернуться</string>
+    <string name="logo_text">Логотип</string>
+    <string name="write_master_text">Написать мастеру</string>
+    <string name="choose_center_text">Выберете центр:</string>
+    <string name="on_map_text">На карте</string>
 </resources>
