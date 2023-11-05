@@ -120,6 +120,7 @@ public class CenterAdapter extends RecyclerView.Adapter<CenterAdapter.CenterView
                         intent.putExtra("userName", uName);
                         intent.putExtra("userPhone", uPhone);
                         intent.putExtra("cId", center.getcId());
+                        intent.putExtra("cAddress", center.getAddress());
                         context.startActivity(intent);
                     }
                 });

@@ -6,11 +6,12 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiFactory {
     private static ApiFactory instance;
     private static Retrofit retrofit;
-    public static final String BASE_URL = "http://192.168.0.96:8080/"; // "http://10.0.2.2:8080/"; //
+    public static final String BASE_URL = "http://10.0.2.2:8080/"; // "http://192.168.0.96:8080/"; //
 
     private ApiFactory() {
         Gson gson = new GsonBuilder()
@@ -18,6 +19,7 @@ public class ApiFactory {
                 .create();
 
         retrofit = new Retrofit.Builder()
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(BASE_URL)

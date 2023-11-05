@@ -30,4 +30,5 @@
     <string name="write_master_text">Написать мастеру</string>
     <string name="choose_center_text">Выберете центр:</string>
     <string name="on_map_text">На карте</string>
+    <string name="message_text">Сообщение</string>
 </resources>

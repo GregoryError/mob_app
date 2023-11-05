@@ -183,7 +183,6 @@ public class MainScreenActivity extends AppCompatActivity implements ScreenView 
 
     @Override
     public void showError(String message) {
-        System.out.println("MYERROR: " + message);
         Snackbar.make(findViewById(R.id.coordinatorLayoutMain), message, 6000).show();
     }
 

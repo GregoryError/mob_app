@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.mob.mobapp.R;
 import com.mob.mobapp.adapters.CenterAdapter;
@@ -54,12 +55,14 @@ public class MasterChatActivity extends AppCompatActivity implements ScreenView{
     public void showData(Object object) {
         adapter = new CenterAdapter(this, false);
         recyclerViewCenterChat.setLayoutManager(new GridLayoutManager(this, GridLayoutManager.VERTICAL));
+        adapter.setuName(uName);
+        adapter.setuPhone(uPhone);
         recyclerViewCenterChat.setAdapter(adapter);
         adapter.setCenterArrayList((ArrayList<Center>) object);
     }
 
     @Override
     public void showError(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }
