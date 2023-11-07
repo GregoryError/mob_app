@@ -4,8 +4,9 @@
     android:id="@+id/cardViewChatItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
-    app:cardCornerRadius="4dp">
+    android:layout_margin="10dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="18dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,8 +28,7 @@
                 android:id="@+id/imageViewAvatar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:src="@drawable/user_24" />
+                android:layout_gravity="center" />
 
         </androidx.cardview.widget.CardView>
 

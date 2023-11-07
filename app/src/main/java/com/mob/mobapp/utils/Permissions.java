@@ -10,6 +10,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.view.View;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -18,6 +20,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.mob.mobapp.R;
 
 public class Permissions extends AppCompatActivity {
+
+    private Context context;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
     public static final int REQUEST_LOCATION = 1;
     public static String[] PERMISSIONS_LOCATION = {
@@ -30,6 +34,10 @@ public class Permissions extends AppCompatActivity {
     public static String[] PERMISSIONS_CALL = {
             Manifest.permission.CALL_PHONE,
     };
+
+    public Permissions(Context context) {
+        this.context = context;
+    }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public static boolean checkPermission(final Context context) {
@@ -81,6 +89,7 @@ public class Permissions extends AppCompatActivity {
                     }).show();
         }
     }
+
 
 }
 

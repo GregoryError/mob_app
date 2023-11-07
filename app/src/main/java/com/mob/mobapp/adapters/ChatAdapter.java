@@ -46,13 +46,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
             holder.textViewFullName.setText("Вы:");
             holder.imageViewAvatar.setBackgroundResource(R.drawable.user_24);
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.cardViewChatItem.getLayoutParams();
-            params.rightMargin = 100;
+            params.rightMargin = 120;
             holder.cardViewChatItem.setLayoutParams(params);
         } else {
             holder.imageViewAvatar.setBackgroundResource(R.drawable.master_24);
             holder.textViewFullName.setText("Мастер:");
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.cardViewChatItem.getLayoutParams();
-            params.leftMargin = 100;
+            params.leftMargin = 120;
             holder.cardViewChatItem.setLayoutParams(params);
         }
 

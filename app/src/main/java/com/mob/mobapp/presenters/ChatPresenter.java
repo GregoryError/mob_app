@@ -19,6 +19,8 @@ public class ChatPresenter implements Presentable {
     private String uPhone;
     private String cId;
 
+    private boolean needLoad;
+
     public ChatPresenter(ScreenView screenView) {
         this.screenView = screenView;
     }
@@ -37,32 +39,42 @@ public class ChatPresenter implements Presentable {
 
     @Override
     public void loadData() {
-        ApiFactory.getInstance().getApiService().getUserMessages(uName, uPhone, cId).enqueue(new Callback<ArrayList<Message>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Message>> call, Response<ArrayList<Message>> response) {
-                switch (response.code()) {
-                    case 200: {
-                        screenView.showData(response.body());
-                        break;
+        if (needLoad) {
+            ApiFactory.getInstance().getApiService().getUserMessages(uName, uPhone, cId).enqueue(new Callback<ArrayList<Message>>() {
+                @Override
+                public void onResponse(Call<ArrayList<Message>> call, Response<ArrayList<Message>> response) {
+                    switch (response.code()) {
+                        case 200: {
+                            screenView.showData(response.body());
+                            break;
+                        }
+                        case 204: {
+                            screenView.showError("204: Нет данных.");
+                            break;
+                        }
+                        case 403: {
+                            screenView.showError("403: Неверная авторизация.");
+                            break;
+                        }
+                        default:
+                            break;
                     }
-                    case 204: {
-                        screenView.showError("204: Нет данных.");
-                        break;
-                    }
-                    case 403: {
-                        screenView.showError("403: Неверная авторизация.");
-                        break;
-                    }
-                    default:
-                        break;
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ArrayList<Message>> call, Throwable t) {
-                screenView.showError(t.getMessage());
-            }
-        });
+                @Override
+                public void onFailure(Call<ArrayList<Message>> call, Throwable t) {
+                    screenView.showError(t.getMessage());
+                }
+            });
+        }
+    }
+
+    public void start() {
+        needLoad = true;
+    }
+
+    public void pause() {
+        needLoad = false;
     }
 }
 

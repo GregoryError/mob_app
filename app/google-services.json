@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "21284932012",
+    "project_id": "drmob-f99e1",
+    "storage_bucket": "drmob-f99e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21284932012:android:f22ab7bf6a48c06a645209",
+        "android_client_info": {
+          "package_name": "com.mob.mobapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHYxrZIgkhadopBaBvNK5TsclwsG3xspo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

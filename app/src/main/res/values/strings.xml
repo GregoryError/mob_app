@@ -2,7 +2,7 @@
     <string name="app_name">Доктор МОБ</string>
     <string name="desc_burg_menu">Дополнительное меню</string>
     <string name="dr_mob_logo">Dr. Mob logo</string>
-    <string name="lorem">Where does it come from?\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance.</string>
+    <string name="lorem">Where does it come from?\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33</string>
     <string name="bonuses">" бонусов"</string>
     <string name="enter">Войдите</string>
     <string name="your_name">Ваше имя</string>
@@ -31,4 +31,7 @@
     <string name="choose_center_text">Выберете центр:</string>
     <string name="on_map_text">На карте</string>
     <string name="message_text">Сообщение</string>
+    <string name="fcm_msg_channel_id">77</string>
+    <string name="tnx_text">Спасибо!</string>
+    <string name="notif_disabled_text">Оповещения отключены!</string>
 </resources>
